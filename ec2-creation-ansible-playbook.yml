@@ -5,8 +5,8 @@
       - name: Creating AWS EC2 server
         tags: creat_ec2
         ec2:
-            aws_access_key: AKIAJHVBWMHODDASMN4Q
-            aws_secret_key: TWUCeFkEXioNCAcJd2EMr7SppAyqToGsYtFZ1k6q
+            aws_access_key: < your access_key >
+            aws_secret_key: < your secret_key>
             region: us-east-1
             key_name: ansible
             instance_type: t2.micro
