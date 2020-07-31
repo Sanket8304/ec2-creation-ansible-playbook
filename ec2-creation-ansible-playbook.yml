@@ -1,0 +1,39 @@
+---
+    - name: AWS-EC2-DOCKER-JENKINS
+      hosts: localhost
+      tasks:
+      - name: Creating AWS EC2 server
+        tags: creat_ec2
+        ec2:
+            aws_access_key: AKIAJHVBWMHODDASMN4Q
+            aws_secret_key: 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
+            region: us-east-1
+            key_name: ansible
+            instance_type: t2.micro
+            image: ami-098f16afa9edf40be
+            wait: yes
+            wait_timeout: 500
+            count: 1
+            instance_tags: 
+                name: ec2_instance
+                os: RedHat
+            monitoring: no
+            vpc_subnet_id: subnet-30d2b17d
+            assign_public_ip: yes
+        register: ec2
+        delegate_to: localhost
+        
+      - name: Add instance to hosts group
+        add_host:
+          hostname: "{{ item.public_ip }}"
+          groupname: launched
+        loop: "{{ ec2.instances }}"
+        
+      - name: Wait for SSH 
+        local_action:
+          module: wait_for
+          host: "{{ item.public_ip }}"
+          port: 22
+          delay: 10
+          timeout: 120
+        loop: "{{ ec2.instances }}"
