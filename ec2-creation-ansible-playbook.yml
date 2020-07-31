@@ -18,7 +18,7 @@
                 name: ec2_instance
                 os: RedHat
             monitoring: no
-            vpc_subnet_id: subnet-30d2b17d
+            vpc_subnet_id: < Defalut subner ID >
             assign_public_ip: yes
         register: ec2
         delegate_to: localhost
