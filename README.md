@@ -39,8 +39,10 @@ After the installation of ansible you have to follow the follwing steps:
 
 Now, you have created the ```yml``` file, the next step is open the terminal and fire the command 
 ```
+ansible-playbook -i hosts aws_ec2_docker-jenkins.yml --connection=local
+```
+or
+```
 ansible-playbook -i hosts aws_ec2_docker-jenkins.yml --connection=local -vvv 
 ```
-If you get the following error while 
->TASK [Creating AWS EC2 server]
->
+```Note :-``` "```-vvv```" is used to see detail logs 
